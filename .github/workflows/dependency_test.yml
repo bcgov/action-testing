@@ -30,4 +30,8 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Run arc_test
+        env:
+            AGO_USERNAME: ${{ secrets.AGO_USERNAME }}
+            AGO_PASSWORD: ${{ secrets.AGO_PASSWORD }}
+            AGO_PORTAL: ${{ secrets.AGO_PORTAL }}
         run: python arc/arc_test.py
