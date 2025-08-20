@@ -1,5 +1,8 @@
 name: arc_test Workflow
 
+permissions:
+  contents: read
+
 on: [workflow_dispatch]
 
 jobs:
