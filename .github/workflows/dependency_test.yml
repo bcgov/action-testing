@@ -1,0 +1,33 @@
+name: arc_test Workflow
+
+permissions:
+  contents: read
+
+on: [workflow_dispatch]
+
+jobs:
+  arc_test_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r arc/requirements.txt
+        
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/arc/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Run arc_test
+        run: python arc/arc_test.py
