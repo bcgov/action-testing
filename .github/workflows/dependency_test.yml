@@ -1,0 +1,20 @@
+name: Hello World Workflow
+
+on: [workflow_dispatch]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: pip install -r arc/requirements.txt
+
+      - name: Run Hello World script
+        run: python arc/arc_test.py
