@@ -12,5 +12,9 @@ portal = os.getenv('AGO_PORTAL')
 
 gis = GIS(url=portal, username=username, password=password)
 
-print(username)
-print("Successfully imported arcgis and geopandas")
+print("Logged in as: " + username)
+
+search_results = gis.content.search(query="type:Feature Layer", max_items=10)
+
+for item in search_results:
+    print(f"Title: {item.title}, Type: {item.type}, ID: {item.id}") 
